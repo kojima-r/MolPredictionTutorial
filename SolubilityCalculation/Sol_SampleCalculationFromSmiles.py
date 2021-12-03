@@ -24,11 +24,11 @@ del_index = original_dataset[original_dataset.MOL == False].index
 edited_dataset = original_dataset.drop(del_index)
 
 #データの編集
-last_data_ID = 120
-last_data_idx = edited_dataset.index.get_loc([edited_dataset.ID == last_data_ID])
-drop_list = list(range(len(edited_dataset[:last_data_idx])))
-print(drop_list)
-calc_datasets = edited_dataset.drop(index=drop_list)
+last_data_ID = 828
+calc_datasets = edited_dataset
+for del_id in range(last_data_ID+1):
+    if del_id in calc_datasets.ID:
+        calc_datasets = calc_datasets.drop(calc_datasets[calc_datasets.ID == del_id].index)
 
 #データ数の取得
 data_num = len(calc_datasets.index)
@@ -53,6 +53,7 @@ task_num = 0
 
 #whileループ
 while len(calc_datasets.index) > 0: 
+    print('Length:',len(calc_datasets))
     #forループ
     #コピーの作成
     loop_datasets = calc_datasets.copy()
@@ -65,7 +66,7 @@ while len(calc_datasets.index) > 0:
             except SystemError:
                 print("rise system Error in line 62")
                 #errorした分子の取得と削除
-                calc_datasets.drop(ID-1, inplace = True)
+                calc_datasets.drop(calc_datasets[calc_datasets.ID == ID].index, inplace = True)
                 rm_num += 1
                 task_num = data_num - rm_num - calc_num
                 print('Remaining molecules:', task_num)
@@ -106,7 +107,7 @@ while len(calc_datasets.index) > 0:
             except psi4.OptimizationConvergenceError:
                 print("raise OptimizationConvergenceError in line 103")
                 #errorした分子の取得と削除
-                calc_datasets.drop(ID-1, inplace = True)
+                calc_datasets.drop(calc_datasets[calc_datasets.ID == ID].index, inplace = True)
                 rm_num += 1
                 task_num = data_num - rm_num - calc_num
                 print('Remaining molecules:', task_num)
@@ -117,7 +118,7 @@ while len(calc_datasets.index) > 0:
             except TimeoutError:
                 print("raise TimeoutError in line 103")
                 #errorした分子の取得と削除
-                calc_datasets.drop(ID-1, inplace = True)
+                calc_datasets.drop(calc_datasets[calc_datasets.ID == ID].index, inplace = True)
                 rm_num += 1
                 task_num = data_num - rm_num - calc_num
                 print('Remaining molecules:', task_num)
@@ -128,7 +129,7 @@ while len(calc_datasets.index) > 0:
         except Exception as e:
             print('Unexpected Error')
             print(e)
-            calc_datasets.drop(ID-1, inplace = True)
+            calc_datasets.drop(calc_datasets[calc_datasets.ID == ID].index, inplace = True)
             rm_num += 1
             task_num = data_num - rm_num - calc_num
             print('Remaining molecules:', task_num)
@@ -138,7 +139,7 @@ while len(calc_datasets.index) > 0:
             break
         except Exception:
             print('Rise Other Error')
-            calc_datasets.drop(ID-1, inplace = True)
+            calc_datasets.drop(calc_datasets[calc_datasets.ID == ID].index, inplace = True)
             rm_num += 1
             task_num = data_num - rm_num - calc_num
             print('Remaining molecules:', task_num)
@@ -150,7 +151,7 @@ while len(calc_datasets.index) > 0:
         #wavefunctionの書き出し
         wave_function.to_file("../../ForMolPredict/WaveFunctions/Solubility_from_smiles/{}_Sol_wavefunction".format(ID))
         #計算の終わった分子の削除
-        calc_datasets.drop(ID-1, inplace = True)
+        calc_datasets.drop(calc_datasets[calc_datasets.ID == ID].index, inplace = True)
         calc_num += 1
         task_num = data_num - rm_num - calc_num
         print("completed caluculations: ", calc_num)
