@@ -854,3 +854,215 @@ Grad: JK                            :    278.133u      5.483s     34.471w      5
 Grad: XC                            :      0.000u      0.000s      0.000w      5 calls
 
 **************************************************************************************
+
+Host: DESKTOP-UJ2LAF7
+
+Timers On : Mon Dec  6 21:04:39 2021
+Timers Off: Mon Dec  6 22:38:47 2021
+
+Wall Time:     5648.46 seconds
+
+                                                       Time (seconds)
+Module                                       User      System        Wall        Calls
+DFH: sparsity prep                  :      7.617u      0.333s      4.757w     57 calls
+DFH: initialize()                   :  10602.350u    137.500s   1297.593w     57 calls
+DFH: AO Construction                :   1500.700u     16.283s    182.169w     57 calls
+DFH: AO-Met. Contraction            :   4257.683u     75.817s    525.304w     57 calls
+HF: Form core H                     :      3.133u      0.150s      1.054w     57 calls
+HF: Form S/X                        :      3.567u      0.000s      0.431w     57 calls
+HF: Guess                           :      5.750u      0.083s      0.713w     57 calls
+SAD Guess                           :      5.483u      0.083s      0.674w      3 calls
+HF: Form G                          :   6455.300u    537.417s    843.684w    577 calls
+JK: D                               :      0.717u      0.050s      0.126w    577 calls
+JK: USO2AO                          :      0.967u      0.017s      0.051w    577 calls
+JK: JK                              :   6451.900u    537.217s    843.278w    577 calls
+DFH: compute_JK()                   :   6451.833u    537.217s    843.273w    577 calls
+DFH: Grabbing AOs                   :      0.000u      0.000s      0.000w    577 calls
+DFH: compute_J                      :    272.417u      0.467s     33.091w    577 calls
+DFH: compute_K                      :   6166.783u    534.433s    808.661w    577 calls
+JK: AO2USO                          :      0.033u      0.000s      0.001w    577 calls
+HF: Form F                          :      0.533u      0.033s      0.077w    577 calls
+HF: Form D                          :      0.400u      0.000s      0.121w    577 calls
+HF: DIIS                            :     20.817u      1.450s      2.732w    574 calls
+DIISManager::add_entry              :      6.800u      0.383s      0.849w    520 calls
+DIISManager::extrapolate            :      6.067u      0.767s      0.841w    520 calls
+bMatrix setup                       :      3.433u      0.367s      0.502w    520 calls
+bMatrix pseudoinverse               :      0.350u      0.083s      0.032w    520 calls
+New vector                          :      2.283u      0.317s      0.303w    520 calls
+HF: Form C                          :     37.950u      0.683s      4.626w    574 calls
+Grad: V T Perturb                   :    767.000u      0.083s     92.108w     57 calls
+Grad: S                             :      1.683u      0.017s      0.234w     57 calls
+Grad: JK                            :  24181.217u    388.650s   3131.003w     57 calls
+JKGrad: Amn                         :   3264.550u    129.683s    473.389w     57 calls
+JKGrad: Awmn                        :      0.000u      0.000s      0.000w     57 calls
+JKGrad: AB                          :   7275.733u     88.833s    915.169w     57 calls
+JKGrad: UV                          :   2116.517u     56.733s    291.925w     57 calls
+JKGrad: ABx                         :    291.483u      3.750s     35.551w     57 calls
+JKGrad: Amnx                        :  11155.350u    104.067s   1404.678w     57 calls
+Grad: XC                            :      0.000u      0.000s      0.000w     57 calls
+
+--------------------------------------------------------------------------------------
+DFH: sparsity prep                  :      7.617u      0.333s      4.757w     57 calls
+DFH: initialize()                   :  10602.350u    137.500s   1297.593w     57 calls
+| DFH: AO Construction              :   1500.700u     16.283s    182.169w     57 calls
+| DFH: AO-Met. Contraction          :   4257.683u     75.817s    525.304w     57 calls
+HF: Form core H                     :      3.133u      0.150s      1.054w     57 calls
+HF: Form S/X                        :      3.567u      0.000s      0.431w     57 calls
+HF: Guess                           :      5.750u      0.083s      0.713w     57 calls
+| SAD Guess                         :      5.483u      0.083s      0.674w      3 calls
+HF: Form G                          :   6455.300u    537.417s    843.684w    577 calls
+| JK: D                             :      0.717u      0.050s      0.126w    577 calls
+| JK: USO2AO                        :      0.967u      0.017s      0.051w    577 calls
+| JK: JK                            :   6451.900u    537.217s    843.278w    577 calls
+| | DFH: compute_JK()               :   6451.833u    537.217s    843.273w    577 calls
+| | | DFH: Grabbing AOs             :      0.000u      0.000s      0.000w    577 calls
+| | | DFH: compute_J                :    272.417u      0.467s     33.091w    577 calls
+| | | DFH: compute_K                :   6166.783u    534.433s    808.661w    577 calls
+| JK: AO2USO                        :      0.033u      0.000s      0.001w    577 calls
+HF: Form F                          :      0.533u      0.033s      0.077w    577 calls
+HF: Form D                          :      0.400u      0.000s      0.121w    577 calls
+HF: DIIS                            :     20.817u      1.450s      2.732w    574 calls
+| DIISManager::add_entry            :      6.800u      0.383s      0.849w    520 calls
+| DIISManager::extrapolate          :      6.067u      0.767s      0.841w    520 calls
+| | bMatrix setup                   :      3.433u      0.367s      0.502w    520 calls
+| | bMatrix pseudoinverse           :      0.350u      0.083s      0.032w    520 calls
+| | New vector                      :      2.283u      0.317s      0.303w    520 calls
+HF: Form C                          :     37.950u      0.683s      4.626w    574 calls
+Grad: V T Perturb                   :    767.000u      0.083s     92.108w     57 calls
+Grad: S                             :      1.683u      0.017s      0.234w     57 calls
+Grad: JK                            :  24181.217u    388.650s   3131.003w     57 calls
+| JKGrad: Amn                       :   3264.550u    129.683s    473.389w     57 calls
+| JKGrad: Awmn                      :      0.000u      0.000s      0.000w     57 calls
+| JKGrad: AB                        :   7275.733u     88.833s    915.169w     57 calls
+| JKGrad: UV                        :   2116.517u     56.733s    291.925w     57 calls
+| JKGrad: ABx                       :    291.483u      3.750s     35.551w     57 calls
+| JKGrad: Amnx                      :  11155.350u    104.067s   1404.678w     57 calls
+Grad: XC                            :      0.000u      0.000s      0.000w     57 calls
+
+**************************************************************************************
+
+Host: DESKTOP-UJ2LAF7
+
+Timers On : Mon Dec  6 23:33:12 2021
+Timers Off: Mon Dec  6 23:33:13 2021
+
+Wall Time:        0.46 seconds
+
+                                                       Time (seconds)
+Module                                       User      System        Wall        Calls
+
+--------------------------------------------------------------------------------------
+
+**************************************************************************************
+
+Host: DESKTOP-UJ2LAF7
+
+Timers On : Mon Dec  6 23:33:32 2021
+Timers Off: Mon Dec  6 23:33:32 2021
+
+Wall Time:        0.45 seconds
+
+                                                       Time (seconds)
+Module                                       User      System        Wall        Calls
+
+--------------------------------------------------------------------------------------
+
+**************************************************************************************
+
+Host: DESKTOP-UJ2LAF7
+
+Timers On : Mon Dec  6 23:36:11 2021
+Timers Off: Mon Dec  6 23:36:11 2021
+
+Wall Time:        0.45 seconds
+
+                                                       Time (seconds)
+Module                                       User      System        Wall        Calls
+
+--------------------------------------------------------------------------------------
+
+**************************************************************************************
+
+Host: DESKTOP-UJ2LAF7
+
+Timers On : Mon Dec  6 23:36:37 2021
+Timers Off: Mon Dec  6 23:38:44 2021
+
+Wall Time:      127.49 seconds
+
+                                                       Time (seconds)
+Module                                       User      System        Wall        Calls
+
+--------------------------------------------------------------------------------------
+
+**************************************************************************************
+
+Host: DESKTOP-UJ2LAF7
+
+Timers On : Mon Dec  6 23:45:57 2021
+Timers Off: Mon Dec  6 23:48:00 2021
+
+Wall Time:      123.71 seconds
+
+                                                       Time (seconds)
+Module                                       User      System        Wall        Calls
+
+--------------------------------------------------------------------------------------
+
+**************************************************************************************
+
+Host: DESKTOP-UJ2LAF7
+
+Timers On : Mon Dec  6 23:51:26 2021
+Timers Off: Mon Dec  6 23:51:27 2021
+
+Wall Time:        0.90 seconds
+
+                                                       Time (seconds)
+Module                                       User      System        Wall        Calls
+
+--------------------------------------------------------------------------------------
+
+**************************************************************************************
+
+Host: DESKTOP-UJ2LAF7
+
+Timers On : Mon Dec  6 23:51:46 2021
+Timers Off: Mon Dec  6 23:51:49 2021
+
+Wall Time:        2.42 seconds
+
+                                                       Time (seconds)
+Module                                       User      System        Wall        Calls
+
+--------------------------------------------------------------------------------------
+
+**************************************************************************************
+
+Host: DESKTOP-UJ2LAF7
+
+Timers On : Tue Dec  7 12:03:30 2021
+Timers Off: Tue Dec  7 12:03:30 2021
+
+Wall Time:        0.45 seconds
+
+                                                       Time (seconds)
+Module                                       User      System        Wall        Calls
+
+--------------------------------------------------------------------------------------
+
+**************************************************************************************
+
+Host: DESKTOP-UJ2LAF7
+
+Timers On : Tue Dec  7 12:04:01 2021
+Timers Off: Tue Dec  7 12:04:01 2021
+
+Wall Time:        0.71 seconds
+
+                                                       Time (seconds)
+Module                                       User      System        Wall        Calls
+
+--------------------------------------------------------------------------------------
+
+**************************************************************************************

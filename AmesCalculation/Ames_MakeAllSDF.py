@@ -186,7 +186,7 @@ for ID in sort_data_sets.ID :
 sort_data_sets['smiles'] = smiles_list
 sort_data_sets['activity'] = act_list
 
-writer=Chem.SDWriter('../../ForMolPredict/SDF_files/Ames/Ames_AllMol.sdf'.format(ID))
+writer=Chem.SDWriter('../../ForMolPredict/SDF_files/Ames/Ames_AllMol.sdf')
 for index, row in sort_data_sets.iterrows():
     ID = row['ID']
     smile = row['smiles']

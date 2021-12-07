@@ -24,7 +24,7 @@ del_index = original_dataset[original_dataset.MOL == False].index
 edited_dataset = original_dataset.drop(del_index)
 
 #データの編集
-last_data_ID = 828
+last_data_ID = 1293
 calc_datasets = edited_dataset
 for del_id in range(last_data_ID+1):
     if del_id in calc_datasets.ID:
@@ -53,11 +53,18 @@ task_num = 0
 
 #whileループ
 while len(calc_datasets.index) > 0: 
-    print('Length:',len(calc_datasets))
     #forループ
     #コピーの作成
     loop_datasets = calc_datasets.copy()
     for i, (ID, smile) in enumerate(zip(loop_datasets['ID'], loop_datasets['smiles'])):
+        if ID in range(1261,last_data_ID+1):
+            print('skip')
+            calc_datasets.drop(calc_datasets[calc_datasets.ID == ID].index, inplace = True)
+            calc_num += 1
+            task_num = data_num - rm_num - calc_num
+            print("completed caluculations: ", calc_num)
+            print('Remaining molecules:', task_num)
+            break
         try:
             #logfile
             print('ID: {}, smiles: {}'.format(ID, smile))
