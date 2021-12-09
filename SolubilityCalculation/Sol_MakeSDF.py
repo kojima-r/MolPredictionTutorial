@@ -118,13 +118,14 @@ def MakeSDF(ID,wf,smile,SOL,SOL_class):
     EmbedMolecule(Hmol, params)
     #MMFF（Merck Molecular Force Field） で構造最適化
     MMFFOptimizeMolecule(Hmol)
-    mol_features, mol_features_name, atom_features, atom_features_name = MakeMolData(wf,smile,act)
+    mol_features, mol_features_name, atom_features, atom_features_name = MakeMolData(wf,smile,SOL,SOL_class)
     writer=Chem.SDWriter('../../ForMolPredict/SDF_files/SOL/{}_SOL.sdf'.format(ID))
     #molecule
     for mol_feature, mol_festure_name in zip(mol_features, mol_features_name):
         if mol_festure_name == 'SOL_class':
             Hmol.SetProp(mol_festure_name,mol_feature)
-        Hmol.SetDoubleProp(mol_festure_name,mol_feature)
+        else:
+            Hmol.SetDoubleProp(mol_festure_name,mol_feature)
     #atom
     for natom in range(Hmol.GetNumAtoms()):
         atom = Hmol.GetAtomWithIdx(natom)
@@ -182,8 +183,15 @@ print('original data has {} molecules'.format(len(original_df.index)))
 smiles_list = []
 SOL_list = []
 SOL_class_list = []
+drop_ID_list =[]
 for ID in sort_data_sets.ID :
-    same_df = original_df.query('ID == @ID')
+    same_df = original_df[original_df['ID']==ID]
+    if(len(same_df.ID)==0):
+        drop_ID_list.append(ID)
+        print('skiped {} molecule'.format(ID))
+        continue
+    print('sameID{}=ID{}'.format(same_df['ID'].values[0],ID))
+    print('ID:{}'.format(ID),':',same_df['smiles'].values[0])
     smile = same_df['smiles'].values[0]
     SOL = same_df['SOL'].values[0]
     SOL_class = same_df['SOL_Class'].values[0]
@@ -191,10 +199,13 @@ for ID in sort_data_sets.ID :
     SOL_list.append(float(SOL))
     SOL_class_list.append(SOL_class)
 
+for drop_ID in drop_ID_list:
+    sort_data_sets.drop(sort_data_sets[sort_data_sets.ID == drop_ID].index,inplace = True)
 sort_data_sets['smiles'] = smiles_list
 sort_data_sets['SOL'] = SOL_list
 sort_data_sets['SOL_class'] = SOL_class_list
 
+SDF_num = 0
 for index, row in sort_data_sets.iterrows():
     ID = row['ID']
     smile = row['smiles']
@@ -207,4 +218,6 @@ for index, row in sort_data_sets.iterrows():
         print('Rise an error. skip this molecule ID: {}'.format(ID))
         continue
     print('SDF file(ID={}) was made!'.format(ID))
-print('completed!!!')
+    SDF_num += 1
+print('{} SDF files was made!'.format(SDF_num))
+print('finished!!!')

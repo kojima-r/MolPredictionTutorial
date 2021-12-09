@@ -123,7 +123,8 @@ def MakeAllSDF(ID,wf,smile,SOL,SOL_class,writer):
     for mol_feature, mol_festure_name in zip(mol_features, mol_features_name):
         if mol_festure_name == 'SOL_class':
             Hmol.SetProp(mol_festure_name,mol_feature)
-        Hmol.SetDoubleProp(mol_festure_name,mol_feature)
+        else:
+            Hmol.SetDoubleProp(mol_festure_name,mol_feature)
     #atom
     for natom in range(Hmol.GetNumAtoms()):
         atom = Hmol.GetAtomWithIdx(natom)
@@ -138,6 +139,8 @@ def MakeAllSDF(ID,wf,smile,SOL,SOL_class,writer):
             else :
                 Chem.CreateAtomDoublePropertyList(Hmol, atom_feature_name)
     writer.write(Hmol)
+
+    
 files = []
 for file in glob.glob("../../ForMolPredict/WaveFunctions/Solubility_from_smiles/*_Sol_wavefunction.npy"):
     files.append(file)
@@ -179,8 +182,15 @@ print('original data has {} molecules'.format(len(original_df.index)))
 smiles_list = []
 SOL_list = []
 SOL_class_list = []
+drop_ID_list =[]
 for ID in sort_data_sets.ID :
-    same_df = original_df.query('ID == @ID')
+    same_df = original_df[original_df['ID']==ID]
+    if(len(same_df.ID)==0):
+        drop_ID_list.append(ID)
+        print('skiped {} molecule'.format(ID))
+        continue
+    print('sameID{}=ID{}'.format(same_df['ID'].values[0],ID))
+    print('ID:{}'.format(ID),':',same_df['smiles'].values[0])
     smile = same_df['smiles'].values[0]
     SOL = same_df['SOL'].values[0]
     SOL_class = same_df['SOL_Class'].values[0]
@@ -188,6 +198,8 @@ for ID in sort_data_sets.ID :
     SOL_list.append(float(SOL))
     SOL_class_list.append(SOL_class)
 
+for drop_ID in drop_ID_list:
+    sort_data_sets.drop(sort_data_sets[sort_data_sets.ID == drop_ID].index,inplace = True)
 sort_data_sets['smiles'] = smiles_list
 sort_data_sets['SOL'] = SOL_list
 sort_data_sets['SOL_class'] = SOL_class_list
