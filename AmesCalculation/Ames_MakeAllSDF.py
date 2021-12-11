@@ -29,14 +29,14 @@ def MakeMolData(wf,smile,act):
     mol_features_name.append('Volume')
     """psi4"""
     #energy
-    energy = wf.energy()
+    energy = wf.energy()    #total energyの獲得
     mol_features.append(energy)
     mol_features_name.append('Energy')
     #homo/lumo
     LUMO_idx = wf.nalpha()
     HOMO_idx = LUMO_idx - 1
-    homo =wf.epsilon_a_subset("AO", "ALL").np[HOMO_idx]
-    lumo = wf.epsilon_a_subset("AO", "ALL").np[LUMO_idx]
+    homo =wf.epsilon_a_subset("AO", "ALL").np[HOMO_idx]       #HOMO準位の獲得
+    lumo = wf.epsilon_a_subset("AO", "ALL").np[LUMO_idx]      #LUMO準位の獲得
     mol_features.append(homo)
     mol_features_name.append('HOMO')
     mol_features.append(lumo)
@@ -48,7 +48,7 @@ def MakeMolData(wf,smile,act):
     psi4.oeprop(wf, "MULLIKEN_CHARGES")
     Mcharges = np.array(wf.atomic_point_charges())
     mol_features.append(np.average(Mcharges))
-    mol_features_name.append('Mcharge_ave')
+    mol_features_name.append('Mcharge_ave')  
     mol_features.append(np.var(Mcharges))
     mol_features_name.append('Mcharge_var')
     atom_features.append(Mcharges.tolist())
@@ -81,11 +81,11 @@ def MakeMolData(wf,smile,act):
     for n in range(atom_num):
         mass = mol.mass(n)
         atom_mass_list.append(mass)
-        xyz = mol.xyz(n)
-        x_dem_list.append(xyz[0])
-        y_dem_list.append(xyz[1])
-        z_dem_list.append(xyz[2])
-        symbol_list.append(mol.symbol(n))
+        xyz = mol.xyz(n)                  #XYZ座標の獲得
+        x_dem_list.append(xyz[0])         #X座標の獲得
+        y_dem_list.append(xyz[1])         #Y座標の獲得
+        z_dem_list.append(xyz[2])         #Z座標の獲得
+        symbol_list.append(mol.symbol(n)) #元素記号の獲得
     atom_features.append(atom_mass_list)
     atom_features_name.append('Mass')
     mol_mass = sum(atom_mass_list)
